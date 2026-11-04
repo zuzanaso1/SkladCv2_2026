@@ -1,5 +1,6 @@
 ﻿using DataEntity.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataEntity
 {
@@ -10,10 +11,33 @@ namespace DataEntity
                 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-            { optionsBuilder.UseSqlServer("Server=localhost;Database=SkladCv2_2026;Trusted_Connection=True;TrustServerCertificate=True;")
+            { optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB; Database=SkladCv2_2026; Integrated Security=True; TrustServerCertificate=True;")
                     .UseLazyLoadingProxies();
             }
-               
+
         }
+
+        public void Seed()
+        {
+            // Kontrola, zda již v DB nejsou data, aby se zabránilo duplicitám.
+            if (MernaJednotka.Any())
+            {
+                return; // Databáze již byla naplněna.
+            }
+
+            // Vytvoření měrných jednotek
+            var mjKs = new MernaJednotka { Popis = "ks" };
+            var mjKg = new MernaJednotka { Popis = "kg" };
+            var mjM3 = new MernaJednotka { Popis = "m3" };
+            var mjL = new MernaJednotka { Popis = "l" };
+
+            // Přidání všech nových objektů do kontextu
+            MernaJednotka.AddRange(mjKs, mjKg, mjM3, mjL);
+       
+
+            // Jediné finální uložení všech změn do databáze
+            SaveChanges();
+        }
+
     }
 }
