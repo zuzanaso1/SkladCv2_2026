@@ -13,9 +13,9 @@ namespace DataEntity.Data
     [AddINotifyPropertyChangedInterface] //automatický notifikace
     [Table("MernaJednotka")]    //nezapomenout přejmenovat 
 
-    public class MernaJednotka
+    public class MernaJednotka : Base.BaseModel
     {
-        [Key]
+        [Key]       //primární klíč
         public int MernaJednotkaID { get; set; }
 
         [StringLength(50, ErrorMessage = "Název nesmí být delší než 50 znaků.")]    //chybová hláška 

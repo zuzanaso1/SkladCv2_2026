@@ -1,0 +1,91 @@
+﻿<mah:MetroWindow x:Class="SkladCv2_2026.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:vm="clr-namespace:SkladCv2_2026.ViewModels"
+        mc:Ignorable="d"
+        Title="Skladový systém" Height="550" Width="450"
+        WindowStartupLocation="CenterScreen">
+
+    <mah:MetroWindow.DataContext>
+        <vm:MainWindowVM/>
+    </mah:MetroWindow.DataContext>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Horní část: Logo a Nadpis (Řádek 0) -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,10">
+            <Image Source="/Views/Logo.png" Width="256" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+            <TextBlock Text="Skladový systém" FontSize="40" HorizontalAlignment="Center" FontWeight="Normal"/>
+        </StackPanel>
+
+        <!-- Střední část: Dva GroupBoxy ve dvou sloupcích (Řádek 1) -->
+        <Grid Grid.Row="1" Margin="0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- 3. GroupBox "Tabulky" (levý sloupec) -->
+            <GroupBox Header="TABULKY" Grid.Column="0" Margin="5" IsEnabled="{Binding TabulkyPovoleny}">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <!-- Tlačítko Materiál -->
+                    <Button Command="{Binding OpenMaterialCommand}" Width="150" Height="80" Margin="0,10">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Image Source="/Views/material.png" Width="48" Height="48"/>
+                            <TextBlock Text="Materiál" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                        </StackPanel>
+                    </Button>
+                    <!-- Tlačítko Palety -->
+                    <Button Command="{Binding OpenPaletyCommand}" Width="150" Height="80" Margin="0,10">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Image Source="/Views/paleta.png" Width="48" Height="48"/>
+                            <TextBlock Text="Palety" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </GroupBox>
+
+            <!-- 4. GroupBox "Přehledy" (pravý sloupec) -->
+            <GroupBox Header="PŘEHLEDY" Grid.Column="1" Margin="5">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <!-- Tlačítko Přehled materiálu -->
+                    <Button Command="{Binding OpenPrehledMaterialuCommand}" Width="150" Height="80" Margin="0,10">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Image Source="/Views/prehledmat.png" Width="48" Height="48" RenderTransformOrigin="0.518,0.5"/>
+                            <TextBlock Text="Přehled materiálu" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                        </StackPanel>
+                    </Button>
+                    <!-- Tlačítko Přehled palet -->
+                    <Button Command="{Binding OpenPrehledPaletCommand}" Width="150" Height="80" Margin="0,10">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Image Source="/Views/prehledpal.png" Width="48" Height="48"/>
+                            <TextBlock Text="Přehled palet" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+
+        <!-- Dolní část: CheckBox a Copyright (Řádek 2) -->
+        <Grid Grid.Row="2" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- 5. CheckBox vlevo dole -->
+            <CheckBox Content="Povolit tabulky" IsChecked="{Binding TabulkyPovoleny}" Grid.Column="0" VerticalAlignment="Center"/>
+
+            <!-- 6. Text vpravo dole -->
+            <TextBlock Text="(c) 2025 TUCNAK" Grid.Column="1" VerticalAlignment="Center" Foreground="Gray"/>
+        </Grid>
+    </Grid>
+</mah:MetroWindow>

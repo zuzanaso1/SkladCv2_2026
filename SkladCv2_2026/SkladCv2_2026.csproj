@@ -9,6 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Views\Logo.png" />
+    <None Remove="Views\material.png" />
+    <None Remove="Views\paleta.png" />
+    <None Remove="Views\prehledmat.png" />
+    <None Remove="Views\prehledpal.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MahApps.Metro" Version="2.4.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.9">
       <PrivateAssets>all</PrivateAssets>
@@ -25,6 +34,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataEntity\DataEntity.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Styles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\Logo.png" />
+    <Resource Include="Views\material.png" />
+    <Resource Include="Views\paleta.png" />
+    <Resource Include="Views\prehledmat.png" />
+    <Resource Include="Views\prehledpal.png" />
   </ItemGroup>
 
 </Project>
