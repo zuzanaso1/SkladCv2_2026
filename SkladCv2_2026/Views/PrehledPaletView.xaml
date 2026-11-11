@@ -1,0 +1,142 @@
+<mah:MetroWindow x:Class="SkladCv2_2026.Views.PrehledPaletView"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 xmlns:vm="clr-namespace:SkladCv2_2026.ViewModels"
+                 Title="Prehled palet"
+                 Width="850"
+                 Height="500"
+                 WindowStartupLocation="CenterScreen">
+
+    <mah:MetroWindow.DataContext>
+        <vm:PrehledPaletVM />
+    </mah:MetroWindow.DataContext>
+
+    <Grid Margin="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <GroupBox Grid.Row="0"
+                  Header="FILTRY"
+                  Padding="8"
+                  Margin="0,0,0,8">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Text="Typ:"
+                           VerticalAlignment="Center"
+                           Margin="0,0,8,0" />
+
+                <ComboBox Grid.Column="1"
+                          ItemsSource="{Binding Typy}"
+                          SelectedItem="{Binding VybranyTyp}"
+                          Margin="0,0,12,0" />
+
+                <TextBlock Grid.Column="2"
+                           Text="Stav:"
+                           VerticalAlignment="Center"
+                           Margin="0,0,8,0" />
+
+                <ComboBox Grid.Column="3"
+                          ItemsSource="{Binding Stavy}"
+                          SelectedItem="{Binding VybranyStav}"
+                          Margin="0,0,12,0" />
+
+                <TextBlock Grid.Column="4"
+                           Text="Material / adresa:"
+                           VerticalAlignment="Center"
+                           Margin="0,0,8,0" />
+
+                <TextBox Grid.Column="5"
+                         Text="{Binding MaterialAdresa, UpdateSourceTrigger=PropertyChanged}"
+                         Margin="0,0,12,0" />
+
+                <Button Grid.Column="6"
+                        Content="ZRUSIT FILTRY"
+                        Command="{Binding ZrusitFiltryCommand}"
+                        Padding="12,5" />
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="1"
+                  Header="PALETY"
+                  Padding="4">
+
+            <DataGrid ItemsSource="{Binding FiltrovanePalety}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      CanUserReorderColumns="False"
+                      SelectionMode="Single">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID"
+                                        Binding="{Binding PaletaId}"
+                                        Width="55" />
+
+                    <DataGridTextColumn Header="MATERIAL"
+                                        Binding="{Binding Material.Nazev}"
+                                        Width="*" />
+
+                    <DataGridTextColumn Header="MJ"
+                                        Binding="{Binding Material.MernaJednotka.Popis}"
+                                        Width="55" />
+
+                    <DataGridTextColumn Header="TYP"
+                                        Binding="{Binding Typ}"
+                                        Width="100" />
+
+                    <DataGridTextColumn Header="STAV"
+                                        Binding="{Binding Stav}"
+                                        Width="120" />
+
+                    <DataGridTextColumn Header="ULOZENI"
+                                        Binding="{Binding AdresaUlozeni}"
+                                        Width="100" />
+
+                    <DataGridTextColumn Header="MNOZSTVI"
+                                        Binding="{Binding Mnozstvi}"
+                                        Width="90" />
+
+                    <DataGridTextColumn Header="KOMENTAR"
+                                        Binding="{Binding Komentar}"
+                                        Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="0,8,0,0">
+
+            <TextBlock Text="Pocet palet:"
+                       FontWeight="SemiBold" />
+
+            <TextBlock Text="{Binding PocetPalet}"
+                       FontWeight="Bold"
+                       Margin="6,0,20,0" />
+
+            <TextBlock Text="Soucet mnozstvi:"
+                       FontWeight="SemiBold" />
+
+            <TextBlock Text="{Binding SoucetMnozstvi}"
+                       FontWeight="Bold"
+                       Margin="6,0,0,0" />
+        </StackPanel>
+    </Grid>
+</mah:MetroWindow>

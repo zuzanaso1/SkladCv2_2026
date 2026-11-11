@@ -1,0 +1,86 @@
+<UserControl x:Class="SkladCv2_2026.Views.PrehledMaterialuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid Background="#F4F4F4">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+
+            <RowDefinition Height="*"/>
+
+            <RowDefinition Height="Auto"/>
+
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#E0E0E0" Padding="5" BorderBrush="#CCCCCC" BorderThickness="0,0,0,1">
+            <StackPanel Orientation="Horizontal">
+
+                <Button Command="{Binding SaveCommand}" Margin="2" Padding="5,2" ToolTip="Uložit změny">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Images/MainMenu/save.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                        <TextBlock Text="Uložit"/>
+                    </StackPanel>
+                </Button>
+
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="5,0"/>
+
+
+                <Button Command="{Binding AddCommand}" Margin="2" Padding="5,2" ToolTip="Přidat záznam">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Images/Icons/Add.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                        <TextBlock Text="Nový"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Command="{Binding EditCommand}" Margin="2" Padding="5,2" ToolTip="Upravit označený">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Images/Icons/Edit.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                        <TextBlock Text="Upravit"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Command="{Binding DeleteCommand}" Margin="2" Padding="5,2" ToolTip="Smazat označený">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Images/Icons/Delete.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                        <TextBlock Text="Smazat"/>
+                    </StackPanel>
+                </Button>
+
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="5,0"/>
+
+                <Button Command="{Binding RelocateCommand}" Margin="2" Padding="5,2" ToolTip="Přemístit / Naskladnit">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Images/Icons/Relocate.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                        <TextBlock Text="Naskladnit / Přemístit"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Border>
+        <DataGrid Grid.Row="1" 
+                  ItemsSource="{Binding Items}" 
+                  SelectedItem="{Binding SelectedItem}"
+                  AutoGenerateColumns="False" 
+                  IsReadOnly="True"
+                  GridLinesVisibility="All"
+                  HorizontalGridLinesBrush="#E0E0E0"
+                  VerticalGridLinesBrush="#E0E0E0"
+                  Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="50"/>
+                <DataGridTextColumn Header="Název" Binding="{Binding Nazev}" Width="2*"/>
+                <DataGridTextColumn Header="Kód" Binding="{Binding Kod}" Width="1*"/>
+                <DataGridTextColumn Header="Měrná jednotka" Binding="{Binding MernaJednotka.Nazev}" Width="1*"/>
+                <DataGridTextColumn Header="Poznámka" Binding="{Binding Poznamka}" Width="2*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Border Grid.Row="2" Background="#EAEAEA" Padding="5,2" BorderBrush="#CCCCCC" BorderThickness="0,1,0,0">
+            <TextBlock Text="Připraven"
+                       FontSize="11"
+                       Foreground="#555555" />
+        </Border>
+    </Grid>
+</UserControl>
